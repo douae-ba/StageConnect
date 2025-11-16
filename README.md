@@ -88,3 +88,8 @@ Le projet utilise le modèle **MVC** :
 ```bash
 git clone https://github.com/douae-ba/StageConnect.git
 cd StageConnect
+```
+## 2. Installer les dépendances
+```bash
+composer install
+```
