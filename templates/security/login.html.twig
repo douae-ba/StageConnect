@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Me connecter{% endblock %}
+
+{% block body %}
+
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            Vous êtes déjà connecté(e) en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Me déconnecter</a>
+        </div>
+    {% endif %}
+
+   <div class="row border rounded-7 p-3 bg-white shadow box-area">
+       <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #6da5e6;">
+            <h1 class="h3 mb-3 font-weight-normal">Gestion des stagiaires</h1>
+
+            {# Suppression des labels, ajout du placeholder dans les inputs #}
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control small-input mb-3" placeholder="Email" autocomplete="email" required autofocus>    
+
+            <input type="password" name="password" id="inputPassword" class="form-control small-input mb-3" placeholder="Mot de passe" autocomplete="current-password" required>
+
+            <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+
+            <div class="checkbox mb-3 text-left">
+                <label class="label-style">
+                    <input type="checkbox" name="_remember_me"> Rester connecté
+                </label>
+            </div>
+
+            <button class="btn btn-primary mb-3 custom-button" type="submit">
+                Me connecter
+            </button>
+
+            <p>
+                <a href="{{ path('app_forgot_password_request') }}" class="forgot-password-link">Mot de passe oublié</a>
+            </p>
+       </div>
+       <div class="col-md-6 right-box">
+           <div class="featured-image mb-3">
+               <img src="{{ asset('images/design.png') }}" class="img-fluid" style="width: 300px;">
+           </div>
+       </div>
+   </div>
+</form>
+</div>
+
+{% endblock %}

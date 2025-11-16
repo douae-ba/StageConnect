@@ -1,0 +1,177 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+{% block stylesheets %}
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+     <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+{% endblock %}
+
+
+{% block body_class %}admin-page{% endblock %}
+
+{% block body %}
+
+
+<div class="wrapper">
+ <aside id="sidebar">
+  <div class="d-flex justify-content-between p4">
+   <div class="sidebar-logo">
+    <a href="#">StageConnect</a>
+   </div>
+   <button class="toggle-btn border-0" type="button">
+    <i id="icon" class='bx bxs-chevrons-right'></i>
+   </button>
+  </div>
+  <ul class="sidebar-nav"> 
+   <li class="sidebar-item">
+    <a href="{{ path('stageForm') }}"" class="sidebar-link" data-bs-toggle="modal">
+     <i class="fa-solid fa-user-plus" style="color: white;"></i>
+     <span>Ajouter un stagiaire</span>
+    </a>
+   </li>
+   <li class="sidebar-item">
+    <a href="{{path('userForm')}}"" class="sidebar-link">
+     <i class="fa-solid fa-user-pen" style="color: white;"></i>
+     <span>Ajouter un utilisateur</span>
+    </a>
+   </li>
+  </ul>
+  <div class="sidebar-footer">
+   <a href="{{path('app_logout')}}" class="sidebar-link">
+    <i class='bx bx-log-out' style="color:white;"></i>
+    <span>Se déconnecté</span>
+   </a>
+  </div>
+ </aside>
+ <div class="main">
+  <nav class="navbar navbar-expand px-4 py-3">
+   <form method="GET" action="{{path('app_admin')}}" class="d-none d-sm-inline-block">
+    <div class="input-group input-group-navbar">
+    <input type="text"
+    id="searchInput"
+     name="q"
+      value="{{app.request.get('q')}}"
+      class="form-control border-0 rounded-0 pe-0"
+      placeholder="Rechercher ...."
+      aria-label="Recherche"/>
+     <button class="btn border-0 rounded-0" type="submit">
+      <i class="bx bx-search"></i>
+     </button>
+    </div>
+   </form>
+  </nav>
+  <main class="content px-3 py-4">
+  <div class="container-fluid">
+   <div class="mb-3">
+    <h3 class="fw-bold fs-4 mb-3">Dashboard</h3>
+    <div class="row">
+     <div class="col-12 col-md-4">
+      <div class="card shadow">
+       <div class="card-body py-4">
+        <h6 class="mb-2 fw-bold">Nombre total de stagiaires</h6>
+        <p class="fw-bold mb-2">{{ total_stagiaires }}</p>
+        <div class="mb-0">
+         <span class="bagde text-success me-2">+{{ stagiaires_ce_mois }} ce mois</span>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="col-12 col-md-4">
+      <div class="card shadow">
+       <div class="card-body py-4">
+        <h6 class="mb-2 fw-bold">Nombre d'encadrants</h6>
+        <p class="fw-bold mb-2">{{ total_encadrants }}</p>
+        <div class="mb-0">
+         <span class="bagde text-success me-2">+{{ stagiaires_ce_mois }} actifs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+   <div class="card shadow">
+    <div class="card-body py-4">
+     <h6 class="mb-2 fw-bold">Nombre de stages en cours</h6>
+      <p class="fw-bold mb-2">{{ stages_en_cours }}</p>
+      <div class="mb-0">
+       <span class="bagde text-success me-2">+{{ stages_a_venir }} à venir</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="row">
+<div class="full-width-table">
+<h3 class="fw-bold fs-4 my-3">Liste Des Stagiaires</h3>
+<table class="table table-striped">
+<thead>
+    <tr class="highlight">
+      <th scope="col">Nom De Stagiaire</th>
+      <th scope="col">Encadrant pédagogique </th>
+      <th scope="col">Encadrant professionelle</th>
+      <th scope="col">Date de Début</th>
+      <th>Date de fin</th>
+      <th>Sujet</th>
+      <th>Etablissement</th>
+      <th>Actions</th> <!-- Nouvelle colonne -->
+    </tr>
+  </thead>
+  <tbody>
+  {% for stagiaire in stagiaires %}
+    <tr>
+      <td scope="row">{{ stagiaire.nom }} {{ stagiaire.prenom }}</td>
+      <td scope="row">{{ stagiaire.stage.encadrant.nom }} {{ stagiaire.stage.encadrant.prenom }}</td>
+      <td scope="row">{{ stagiaire.stage.professeur.nom }}{{ stagiaire.stage.professeur.prenom }}</td>
+      <td scope="row">{{ stagiaire.stage ? stagiaire.stage.dateDebut|date('d/m/Y') }}</td>
+      <td scope="row">{{ stagiaire.stage? stagiaire.stage.dateFin|date('d/m/Y') }}</td>
+      <td scope="row">{{ stagiaire.stage ? stagiaire.stage.sujet :'Non défini' }}</td>
+      <td scope="row">{{ stagiaire.stage ? stagiaire.stage.etablissement }}</td>
+      <td><!--bouton modifier-->
+      
+        <!-- Bouton supprimer -->
+        <form method="post" action="{{ path('stagiaire_delete', {'id': stagiaire.id}) }}" style="display:inline-block;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce stagiaire ?');">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ stagiaire.id) }}">
+          <button class="btn btn-sm btn-danger" title="Supprimer">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </form></td>
+    </tr>
+    {% endfor %}   
+  </tbody>
+ </table>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="footer">
+<div class="container-fluid">
+<div class="row text-body-secondary">
+<div class="col-6 text-start">
+<a href="#" class="text-body-secondary">
+<strong>StageConnect</strong>
+</a>
+</div>
+<div class="col-6 text-end txt-body-secondary d-none d-md-block">
+<ul class="list-inline mb-0">
+<li class="list-inline-item">
+<a href="#" class="text-body-secondary">Contact</a>
+</li>
+<li class="list-inline-item">
+<a href="#" class="text-body-secondary">About</a>
+</li>
+<li class="list-inline-item">
+<a href="#" class="text-body-secondary">Terms&Conditions</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</div>
+
+{% endblock %}

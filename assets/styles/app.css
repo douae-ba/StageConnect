@@ -1,3 +1,467 @@
-body {
-    background-color: skyblue;
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+/* &&&&&&&&&& pour login &&&&&&&&&& */
+.titre-login {
+    color: #0a2444;
+    font-family:'Montserrat',sans-serif;
 }
+.box-area{
+    width: 950px;
+    max-width: 95vw;  /* ajout pour éviter débordement sur petits écrans */
+    font-family: 'Lato', sans-serif;
+}
+/*------------ Right box ------------*/
+.right-box{
+    padding: 40px 50px 40px 50px;
+}
+/*------------ Custom Placeholder ------------*/
+::placeholder{
+    font-size: 16px;
+    color: #666666; 
+}
+/* Bord arrondi plus prononcé */
+.rounded-4{
+    border-radius: 20px;
+}
+.rounded-5{
+    border-radius: 30px;
+}
+.label-style {
+    font-size: 17px; 
+    color:black;
+    font-family: 'Roboto', sans-serif;
+}
+/* Bouton Me connecter personnalisé */
+.custom-button {
+    background-color: #4487da;
+    font-size: 1rem;
+    padding: 8px 0;
+    width: 150px;
+    height: 40px;
+    border: none;
+    transition: background-color 0.3s ease;
+    display: block; 
+    margin: 0 auto; 
+    font-family: 'Poppins', sans-serif;
+}
+.custom-button:hover {
+    background-color: #3572c6;
+}
+/* Lien Mot de passe oublié */
+.forgot-password-link {
+    font-size: 1.1rem;
+    color: #0a2444;
+    text-decoration: underline;
+}
+.forgot-password-link:hover {
+    color: #2a5db0;
+    text-decoration: none;
+}
+/* Input petite taille mais responsive */
+.small-input {
+    font-size: 14px;
+    padding: 5px 10px;
+    max-width: 200%;  /* ne dépasse jamais le container */
+    width: 250px;
+    box-sizing: border-box;
+}
+/*------------ For small screens------------*/
+@media only screen and (max-width: 768px){
+    .box-area{
+        margin: 0 10px;
+        width: 100% !important; /* forcer 100% largeur */
+        flex-direction: column; /* si flex */
+    }
+    .right-box{
+        height: 100px;
+        overflow: hidden;
+    }
+    .left-box{
+        padding: 20px;
+    }
+    .small-input {
+        width: 100%; /* full width on small screens */
+    }
+}
+.forgot-password-link{
+    font-family: 'Roboto', sans-serif;
+}
+/* &&&&&&&&&& admin home &&&&&&&&&& */
+a{
+    text-decoration: none;
+    margin-top: 40px;
+    margin-bottom: 40px;
+ 
+}
+li{
+    list-style: none;
+}
+body.admin-page{
+    font-family: 'Outfit',serif;
+}
+.wrapper{
+    display: flex;
+}
+.main{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    transition: all 0.25s ease-in-out;
+    background-color: #FFF;
+   
+}
+#sidebar{
+    width: 90px;
+    min-width: 90px;
+    transition: all 0.25s ease-in-out ;
+    background-color:#042248 ;
+    display: flex;
+    flex-direction: column;
+}
+#sidebar.expand{
+    width:260px;
+    min-width: 260px;
+}
+#sidebar:not(.expand) .sidebar-logo,
+#sidebar:not(.expand) a.sidebar-link span{
+    display: none;
+}
+
+.toggle-btn{
+    width: 30px;
+    height: 30px;
+    color: #FFF;
+    border-radius: 0.425rem;
+    font-size: 18px;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    background-color: #609de5;
+}
+.toggle-btn i{
+    color: #FFF;
+}
+#sidebar.expand .sidebar-logo,
+#sidebar.expand a.sidebar-link span{
+    animation: fadeIn .25s ease;
+}
+@keyframes fadeIn{
+    0%{opacity: 0;}
+    100%{opacity:1 ;}
+}
+.sidebar-logo a{
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+.sidebar-nav{
+    padding: 0.7rem 0;
+    flex: 11 auto;
+    z-index: 10;
+}
+a.sidebar-link{
+    padding: .625rem 1.625rem;
+    color:#fff;
+    display: block;
+    white-space: nowrap;
+    font-weight: 700;
+    border-left: 3px solid transparent;
+}
+.sidebar-link i{
+    font-size: 1.1rem;
+    margin-right: .75rem;
+}
+a.sidebar-link:hover{
+    background-color: rgba(255, 255, 255,.075);
+    border-left: 3px solid #3B7DDD;
+}
+.sidebar-item{
+    position:relative;
+}
+
+
+.navbar{
+    background-color: #FFF;
+    box-shadow: 0 0 2rem 0 rgba(33, 37, 41,.1);
+}
+.navbar-expand{
+    min-width: 200px;
+}
+.card{
+    background-color: #FFF;
+    transition: .4s;
+    cursor: pointer;
+    color:#000 ;
+    margin-bottom: 1rem;
+    border-color: rgba(231, 234, 243, 0.7);
+}
+.card h6{
+    text-transform: uppercase;
+    font-size: 0.7161rem;
+    margin-bottom:.25rem;
+}
+.card:hover{
+    background-color: #0e2847;
+    color: #FFF;
+    transform: translateY(-10.5px);
+}
+.table>thead tr{
+    color: #FFF;
+    text-align: left;
+}
+tr.highlight th{
+    background-color: #0e2847;
+    color: #FFF;
+}
+.content{
+    flex: 11 auto;
+    }
+footer{
+    background-color: #f5f5f5;
+    padding : 1rem .875rem;
+}
+@media(min-width: 768px){
+    .input-group-navbar .form-control:focus{
+        outline: none;
+        box-shadow:rgba(0, 0, 0,.05) ;
+        border: none;
+        background-color: #f5f5f5;
+    }
+    .input-group-navbar{
+        max-width: 320px;
+    }
+    .input-group-navbar .form-control{
+        color:#0e2847;
+        background-color: #f5f5f5;
+        height: calc(2.44375rem+ 2px);
+    }
+    .input-group-navbar .btn{
+        color: #000;
+        background-color: #f5f5f5;
+        cursor: pointer;
+        z-index: 1000;
+    }
+    .input-group-navbar .btn:active{
+        background-color:#f5f5f5 ;
+    }
+    .navbar-expand {
+        box-shadow: 0 .1rem .2rem rgba(0, 0,0, .05);
+    }
+}
+/* &&&&&&&&&& stageForm &&&&&&&&&& */
+.form-container {
+    max-width: 800px;        /* ✅ Réduit la largeur du formulaire */
+    margin: 0 auto;          /* ✅ Centre horizontalement */
+    background-color: #5c9ae4;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.form-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.form-container .form-group {
+    margin-bottom: 15px;
+}
+
+.form-container label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="password"],
+.form-container input[type="date"],
+.form-container textarea,
+.form-container select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.form-container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #0c2d48;
+    color: #f5f5f5;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+    background-color: #134074;
+}
+/* &&&&&&&&&& interface stagiaire &&&&&&&&&& */
+/* Variables spécifiques au stagiaire */
+.stagiaire-interface {
+    --primary-color: #2c5e9e;
+    --secondary-color: #8e44ad;
+    --sidebar-width: 280px;
+}
+
+/* Layout */
+.stagiaire-interface {
+    display: flex;
+    min-height: 100vh;
+}
+
+.stagiaire-sidebar {
+    width: var(--sidebar-width);
+    background: #0a2444;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+}
+
+.stagiaire-main {
+    flex: 1;
+    padding: 2rem;
+}
+
+/* Navigation */
+.stagiaire-nav .nav-item {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    color: #495057;
+}
+
+.stagiaire-nav .nav-item.active {
+    background-color: #f8f9fa;
+    color: var(--primary-color);
+}
+
+/* Messagerie */
+.message-tabs {
+    display: flex;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 1.5rem;
+}
+
+.tab-btn {
+    border: none;
+    background: none;
+    padding: 0.75rem 1.5rem;
+    position: relative;
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 1.5rem;
+    right: 1.5rem;
+    height: 3px;
+    background: var(--primary-color);
+}
+
+/* Fichiers */
+.file-upload-section {
+    border: 2px dashed #dee2e6;
+    padding: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .stagiaire-sidebar {
+        transform: translateX(-100%);
+        position: fixed;
+        z-index: 1000;
+    }
+    
+    .stagiaire-main {
+        margin-left: 0;
+    }
+}
+h2 {
+     font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #f5f5f5;
+    text-align: center;
+    
+}
+.profile-section {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+.profile-pic {
+    font-size: 3rem;
+    color: #4e73df;
+}
+
+.profile-info {
+    margin-top: 10px;
+}
+
+.username {
+    display: block;
+    font-weight: 600;
+    color:#fff;
+}
+.role {
+    color: #f5f5f5;
+    font-size: 0.8rem;
+}
+.sidebar-account h3 {
+    font-size: 1rem;
+    color: #d5d7df;
+    padding: 0 15px;
+    margin-bottom: 10px;
+}
+
+.sidebar-account ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.sidebar-account a {
+    display: block;
+    padding: 8px 15px;
+    color: #4487da;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-size: larger;
+}
+.sidebar-account a:hover {
+    background-color: #ffffff;
+    color: #4487da;
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 8px 15px;
+    cursor: pointer;
+    color: #4487da;
+    font-size: larger;
+}
+
+.logout-btn:hover {
+    color: #e74a3b;
+}
+
+/* &&&&&&&&&& changer le mot de passe &&&&&&&&&& */
+/* Style des onglets */
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,180 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un utilisateur{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2 class="h4 mb-0"><i class="fas fa-user-plus me-2"></i> Ajouter un utilisateur</h2>
+                        <a href="{{ path('app_admin') }}" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-arrow-left me-1"></i> 
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="card-body">
+                    {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+                    
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                {{ form_label(form.nom, 'Nom *', {'label_attr': {'class': 'form-label'}}) }}
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    {{ form_widget(form.nom, {'attr': {'class': 'form-control' ~ (form.nom.vars.valid ? '' : ' is-invalid')}}) }}
+                                </div>
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.nom) }}
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                {{ form_label(form.prenom, 'Prénom *', {'label_attr': {'class': 'form-label'}}) }}
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    {{ form_widget(form.prenom, {'attr': {'class': 'form-control' ~ (form.prenom.vars.valid ? '' : ' is-invalid')}}) }}
+                                </div>
+                                <div class="invalid-feedback">
+                                    {{ form_errors(form.prenom) }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            {{ form_label(form.email, 'Email *', {'label_attr': {'class': 'form-label'}}) }}
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control' ~ (form.email.vars.valid ? '' : ' is-invalid')}}) }}
+                            </div>
+                            <div class="invalid-feedback">
+                                {{ form_errors(form.email) }}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            {{ form_label(form.roles, 'Rôle *', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.roles, {'attr': {'class': 'form-select' ~ (form.roles.vars.valid ? '' : ' is-invalid')}}) }}
+                            <div class="invalid-feedback">
+                                {{ form_errors(form.roles) }}
+                            </div>
+                            <small class="text-muted">Maintenez Ctrl pour sélectionner plusieurs rôles</small>
+                        </div>
+                        
+                        <div class="mb-4">
+                            {{ form_label(form.plainPassword, 'Mot de passe *', {'label_attr': {'class': 'form-label'}}) }}
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                {{ form_widget(form.plainPassword, {'attr': {'class': 'form-control' ~ (form.plainPassword.vars.valid ? '' : ' is-invalid')}}) }}
+                            </div>
+                            <div class="invalid-feedback">
+                                {{ form_errors(form.plainPassword) }}
+                            </div>
+                            <div class="password-strength mt-2">
+                                <div class="progress" style="height: 5px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                </div>
+                                <small class="text-muted">Le mot de passe doit contenir au moins 8 caractères</small>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            {{ form_label(form.stage, 'Stage associé', {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(form.stage, {'attr': {'class': 'form-select' ~ (form.stage.vars.valid ? '' : ' is-invalid')}}) }}
+                            <div class="invalid-feedback">
+                                {{ form_errors(form.stage) }}
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <button type="reset" class="btn btn-outline-secondary me-md-2">
+                                <i class="fas fa-eraser me-1"></i> Réinitialiser
+                            </button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save me-1"></i> Enregistrer
+                            </button>
+                        </div>
+                    
+                    {{ form_end(form) }}
+                </div>
+                
+                <div class="card-footer bg-light">
+                    <small class="text-muted">* Champs obligatoires</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .card {
+        border-radius: 10px;
+        overflow: hidden;
+        border: none;
+    }
+    .card-header {
+        border-bottom: none;
+    }
+    .form-control, .form-select {
+        border-radius: 5px;
+        padding: 10px;
+    }
+    .form-control:focus, .form-select:focus {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+    .btn-outline-light {
+        border-color: rgba(255,255,255,0.3);
+    }
+    .btn-outline-light:hover {
+        background-color: rgba(255,255,255,0.1);
+        color: white;
+    }
+    .invalid-feedback {
+        display: block;
+    }
+    .progress-bar {
+        transition: width 0.5s ease;
+    }
+</style>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Indicateur de force du mot de passe
+    const passwordInput = document.querySelector('#{{ form.plainPassword.vars.id }}');
+    if (passwordInput) {
+        passwordInput.addEventListener('input', function() {
+            const progress = this.nextElementSibling.querySelector('.progress-bar');
+            const length = this.value.length;
+            let strength = 0;
+            
+            if (length > 0) strength += 20;
+            if (length >= 8) strength += 30;
+            if (/[A-Z]/.test(this.value)) strength += 20;
+            if (/[0-9]/.test(this.value)) strength += 20;
+            if (/[^A-Za-z0-9]/.test(this.value)) strength += 10;
+            
+            progress.style.width = Math.min(strength, 100) + '%';
+            
+            if (strength < 40) {
+                progress.className = 'progress-bar bg-danger';
+            } else if (strength < 70) {
+                progress.className = 'progress-bar bg-warning';
+            } else {
+                progress.className = 'progress-bar bg-success';
+            }
+        });
+    }
+});
+</script>
+{% endblock %}

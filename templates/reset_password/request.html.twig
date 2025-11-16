@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Le mot de passe oublié{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/change.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="wrapper">
+    <div class="container main">
+        <div class="row">
+            <div class="col-md-6 side-image">
+                <img src="{{ asset('images/change.png') }}" alt="">
+            </div>
+
+            <div class="col-md-6 right">
+                <div class="input-box">
+                    <header>J'ai oublié mon mot de passe</header>
+
+                    {% for flash_error in app.flashes('reset_password_error') %}
+                        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                    {% endfor %}
+
+                    {{ form_start(requestForm) }}
+                        <div class="input-field">
+                            {{ form_widget(requestForm.email, {
+                                'attr': {'class': 'input', 'id': 'mail', 'required': true}
+                            }) }}
+                            <label for="mail">Votre mail</label>
+                        </div>
+
+                        <div class="input-field">
+                            <input type="submit" class="submit" value="Envoyer le lien">
+                        </div>
+                    {{ form_end(requestForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
