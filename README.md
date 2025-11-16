@@ -93,3 +93,44 @@ cd StageConnect
 ```bash
 composer install
 ```
+## 3.Configurer l’environnement
+Créer un fichier .env.local :
+```bash
+DATABASE_URL="mysql://DB_USER:DB_PASSWORD@127.0.0.1:3306/stagiaire?serverVersion=8.0"
+MAILER_DSN="smtp://USERNAME:PASSWORD@HOST:PORT"
+```
+## 4.Exécuter les migrations
+```bash
+php bin/console doctrine:migrations:migrate
+```
+## 5.Lancer le serveur de développement
+```bash
+symfony server:start
+```
+
+⚠️ Limitations
+- Application dédiée à un seul établissement
+- Messagerie non temps réel
+- Gestion des périodes de stage non automatisée
+
+🚀 Roadmap
+- Chat en temps réel (Mercure / WebSockets)
+- Notifications email et in-app
+- Génération automatique de PDF
+- Workflow automatique pour validation des stages
+
+📦Déploiement en Production
+1. Prérequis
+- PHP compatible Symfony(8.2 ou plus)
+- MySQL 8+ / MariaDB
+- Serveur Nginx ou Apache
+- Composer v2
+
+2. Installation en production
+ ```bash
+git clone https://github.com/douae-ba/StageConnect.git
+cd StageConnect
+
+composer install --no-dev --optimize-autoloader
+```
+
